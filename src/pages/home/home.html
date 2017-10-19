@@ -5,14 +5,29 @@
     </button>
     <ion-title>Home</ion-title>
   </ion-navbar>
+  <ion-toolbar>
+    <ion-searchbar
+      [(ngModel)]="search"
+      (ionInput)="onSearch($event)"
+      (ionCancel)="onSearchCancel($event)">
+    </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>GitLab App</h3>
+<ion-content>
+  <h3 padding-horizontal>GitLab App</h3>
 
-  <p>
-    ...
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <ion-list>
+    <ion-item *ngFor="let project of projects">
+      <ion-avatar item-start>
+        <img src="http://placehold.it/300x300">
+      </ion-avatar>
+      <h2>{{project.name_with_namespace}}</h2>
+      <p>{{project.description}}</p>
+      <small>updated {{project.last_activity_at | amTimeAgo}}</small>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
