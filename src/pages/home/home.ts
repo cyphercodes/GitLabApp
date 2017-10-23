@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {LoadingController, NavController} from "ionic-angular";
+import {Component, ViewChild} from "@angular/core";
+import {NavController, Searchbar} from "ionic-angular";
 import {Api} from "../../common/services/Api";
 
 @Component({
@@ -8,12 +8,16 @@ import {Api} from "../../common/services/Api";
 })
 export class HomePage {
 
+  @ViewChild('searchbar') searchbar: Searchbar;
+
   public search = '';
   projects = [];
   private page = 1;
   request = null;
+  spin = false;
+  showSearchBar = false;
 
-  constructor(public navCtrl: NavController, protected loadingCtrl: LoadingController, protected api: Api) {
+  constructor(public navCtrl: NavController, protected api: Api) {
 
   }
 
@@ -22,11 +26,14 @@ export class HomePage {
   }
 
   onSearch(e) {
+    if (this.search.length == 0) {
+      this.showSearchBar = false;
+    }
     this.doSearch(true);
   }
 
   onSearchCancel(e) {
-
+    this.showSearchBar = false;
   }
 
   doInfinite(infiniteScroll) {
@@ -36,6 +43,7 @@ export class HomePage {
 
   doSearch(clear = false, infiniteSearch = null) {
     if (clear) {
+      this.spin = true;
       this.projects = [];
       this.page = 0;
     }
@@ -56,7 +64,13 @@ export class HomePage {
       if (infiniteSearch) {
         infiniteSearch.complete();
       }
+      this.spin = false;
     });
+  }
+
+  showSearch() {
+    this.showSearchBar = true;
+    this.searchbar.setFocus();
   }
 
 
