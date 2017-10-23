@@ -70,7 +70,9 @@ export class HomePage {
 
   showSearch() {
     this.showSearchBar = true;
-    this.searchbar.setFocus();
+    setTimeout(() => {
+      this.searchbar.setFocus();
+    }, 300)
   }
 
 
