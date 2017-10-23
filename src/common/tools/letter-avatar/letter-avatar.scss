@@ -1,0 +1,117 @@
+[data-letters]:before {
+  content: attr(data-letters);
+  display: inline-block;
+  font-size: 1em;
+  width: 2.5em;
+  height: 2.5em;
+  line-height: 2.5em;
+  text-align: center;
+  border-radius: 50%;
+  background: plum;
+  vertical-align: middle;
+  color: white;
+}
+
+[data-letters="A"]:before {
+  background-color: #5A8770;
+}
+
+[data-letters="B"]:before {
+  background-color: #B2B7BB;
+}
+
+[data-letters="C"]:before {
+  background-color: #6FA9AB;
+}
+
+[data-letters="D"]:before {
+  background-color: #F5AF29;
+}
+
+[data-letters="E"]:before {
+  background-color: #0088B9;
+}
+
+[data-letters="F"]:before {
+  background-color: #F18636;
+}
+
+[data-letters="G"]:before {
+  background-color: #D93A37;
+}
+
+[data-letters="H"]:before {
+  background-color: #A6B12E;
+}
+
+[data-letters="I"]:before {
+  background-color: #5C9BBC;
+}
+
+[data-letters="J"]:before {
+  background-color: #F5888D;
+}
+
+[data-letters="K"]:before {
+  background-color: #9A89B5;
+}
+
+[data-letters="L"]:before {
+  background-color: #407887;
+}
+
+[data-letters="M"]:before {
+  background-color: #9A89B5;
+}
+
+[data-letters="N"]:before {
+  background-color: #5A8770;
+}
+
+[data-letters="O"]:before {
+  background-color: #D33F33;
+}
+
+[data-letters="P"]:before {
+  background-color: #A2B01F;
+}
+
+[data-letters="Q"]:before {
+  background-color: #F0B126;
+}
+
+[data-letters="R"]:before {
+  background-color: #0087BF;
+}
+
+[data-letters="S"]:before {
+  background-color: #F18636;
+}
+
+[data-letters="T"]:before {
+  background-color: #0087BF;
+}
+
+[data-letters="U"]:before {
+  background-color: #B2B7BB;
+}
+
+[data-letters="V"]:before {
+  background-color: #72ACAE;
+}
+
+[data-letters="W"]:before {
+  background-color: #9C8AB4;
+}
+
+[data-letters="X"]:before {
+  background-color: #5A8770;
+}
+
+[data-letters="Y"]:before {
+  background-color: #EEB424;
+}
+
+[data-letters="Z"]:before {
+  background-color: #407887;
+}

@@ -22,9 +22,11 @@
 <ion-content>
   <h3 padding-horizontal>GitLab App</h3>
   <ion-list>
-    <ion-item *ngFor="let project of projects">
-      <ion-avatar item-start>
-        <img src="http://placehold.it/300x300">
+    <ion-item *ngFor="let project of projects; let i = index">
+      <ion-avatar item-start *ngIf="project.avatar_url">
+        <img src="{{project.avatar_url}}">
+      </ion-avatar>
+      <ion-avatar item-start *ngIf="!project.avatar_url" [attr.data-letters]="project.name.charAt(0).toUpperCase()">
       </ion-avatar>
       <h2>{{project.name_with_namespace}}</h2>
       <p>{{project.description}}</p>
