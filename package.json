@@ -21,15 +21,17 @@
     "@angular/platform-browser": "4.4.3",
     "@angular/platform-browser-dynamic": "4.4.3",
     "@ionic-native/core": "4.3.0",
+    "@ionic-native/in-app-browser": "^4.3.2",
     "@ionic-native/splash-screen": "4.3.0",
     "@ionic-native/status-bar": "4.3.0",
     "@ionic/storage": "2.0.1",
     "angular2-moment": "^1.7.0",
-    "sweetalert2": "^6.6.6",
+    "cordova-plugin-inappbrowser": "^1.7.1",
     "ionic-angular": "3.7.1",
     "ionicons": "3.0.0",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
+    "sweetalert2": "^6.6.6",
     "zone.js": "0.8.18"
   },
   "devDependencies": {
@@ -40,5 +42,10 @@
   "config": {
     "ionic_build_to_es5": false,
     "ionic_source_map": "eval"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-inappbrowser": {}
+    }
   }
 }

@@ -13,6 +13,7 @@ import {HttpModule} from "@angular/http";
 import {Ahttp} from "../common/services/Ahttp";
 import {MomentModule} from "angular2-moment";
 import {Api} from "../common/services/Api";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import {Api} from "../common/services/Api";
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    MomentModule
+    MomentModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -38,7 +39,8 @@ import {Api} from "../common/services/Api";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Ahttp,
-    Api
+    Api,
+    InAppBrowser
   ]
 })
 export class AppModule {

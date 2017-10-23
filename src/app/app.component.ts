@@ -9,6 +9,7 @@ import {
   MenuOptionModel, SideMenuContentComponent,
   SideMenuSettings
 } from "../common/tools/side-menu-content/side-menu-content.component";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 @Component({
   templateUrl: 'app.html'
@@ -32,7 +33,7 @@ export class MyApp {
     }
   };
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private menuCtrl: MenuController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private menuCtrl: MenuController, private iab: InAppBrowser) {
     this.initializeApp();
 
   }
@@ -126,7 +127,7 @@ export class MyApp {
     this.menuCtrl.close().then(() => {
 
       if (option.custom && option.custom.isLogin) {
-        // this.presentAlert('You\'ve clicked the login option!');
+        this.login();
       } else if (option.custom && option.custom.isLogout) {
         // this.presentAlert('You\'ve clicked the logout option!');
       } else if (option.custom && option.custom.isExternalLink) {
@@ -142,5 +143,13 @@ export class MyApp {
   public collapseMenuOptions(): void {
     // Collapse all the options
     this.sideMenu.collapseAllOptions();
+  }
+
+  login() {
+
+    const ref = this.iab.create('https://gitlab.com/oauth/authorize?client_id=46b1ed0c950b9445ece44639c2295c199675cfbc0fac3c355e3bd1ce8eca1e79&redirect_uri=' + encodeURIComponent("http://localhost/auth") + '&response_type=token&state=abc123');
+    ref.on('loadstart').subscribe((res) => {
+      console.log(res);
+    });
   }
 }
