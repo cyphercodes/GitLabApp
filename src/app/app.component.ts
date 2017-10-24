@@ -10,6 +10,7 @@ import {
   SideMenuSettings
 } from "../common/tools/side-menu-content/side-menu-content.component";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
+import swal from "sweetalert2";
 
 @Component({
   templateUrl: 'app.html'
@@ -146,10 +147,22 @@ export class MyApp {
   }
 
   login() {
-
-    const ref = this.iab.create('https://gitlab.com/oauth/authorize?client_id=46b1ed0c950b9445ece44639c2295c199675cfbc0fac3c355e3bd1ce8eca1e79&redirect_uri=' + encodeURIComponent("http://localhost/auth") + '&response_type=token&state=abc123');
+    const client_id = '46b1ed0c950b9445ece44639c2295c199675cfbc0fac3c355e3bd1ce8eca1e79';
+    const redirect_uri = encodeURIComponent("http://localhost/auth");
+    const ref = this.iab.create('https://gitlab.com/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=token', "_blank");
     ref.on('loadstart').subscribe((res) => {
-      console.log(res);
+      if ((res.url).indexOf("http://localhost/auth") === 0) {
+        ref.close();
+        let responseParameters = ((res.url).split("#")[1]).split("&");
+        let parsedResponse = {};
+        for (let i = 0; i < responseParameters.length; i++) {
+          parsedResponse[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+        }
+        if (parsedResponse["access_token"] !== undefined && parsedResponse["access_token"] !== null) {
+          let token = parsedResponse['access_token'];
+          swal('Welcome!', "You have logged in successfully! You access toke is: " + token, 'success');
+        }
+      }
     });
   }
 }
