@@ -14,6 +14,7 @@ import {Ahttp} from "../common/services/Ahttp";
 import {MomentModule} from "angular2-moment";
 import {Api} from "../common/services/Api";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {Auth} from "../common/services/Auth";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Ahttp,
     Api,
+    Auth,
     InAppBrowser
   ]
 })

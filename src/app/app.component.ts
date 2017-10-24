@@ -11,6 +11,7 @@ import {
 } from "../common/tools/side-menu-content/side-menu-content.component";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import swal from "sweetalert2";
+import {Auth} from "../common/services/Auth";
 
 @Component({
   templateUrl: 'app.html'
@@ -34,7 +35,7 @@ export class MyApp {
     }
   };
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private menuCtrl: MenuController, private iab: InAppBrowser) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private menuCtrl: MenuController, private iab: InAppBrowser, private auth: Auth) {
     this.initializeApp();
 
   }
@@ -151,6 +152,7 @@ export class MyApp {
     const client_id = '46b1ed0c950b9445ece44639c2295c199675cfbc0fac3c355e3bd1ce8eca1e79';
     const redirect_uri = encodeURIComponent("http://localhost/auth");
     const ref = this.iab.create('https://gitlab.com/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=token&state=' + state, "_blank");
+
     ref.on('loadstart').subscribe((res) => {
       if ((res.url).indexOf("http://localhost/auth") === 0) {
         ref.close();
@@ -164,12 +166,10 @@ export class MyApp {
         let token = parsedResponse['access_token'];
         let backstate = parsedResponse['state'];
         console.log(parsedResponse);
-        if (parsedResponse["access_token"] !== undefined && parsedResponse["access_token"] !== null) {
-          let token = parsedResponse['access_token'];
-          let backstate = parsedResponse['state'];
-          console.log(backstate);
-          console.log(token);
-          swal('Welcome!', "You have logged in successfully! You access token is: " + token, 'success');
+        if (token !== undefined && token !== null && backstate === state) {
+          this.auth.login(token);
+          swal('Welcome!', 'You have logged in successfully!', 'success');
+          this.nav.setRoot(HomePage);
         }
       }
     });
