@@ -161,13 +161,15 @@ export class MyApp {
         for (let i = 0; i < responseParameters.length; i++) {
           parsedResponse[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
         }
+        let token = parsedResponse['access_token'];
+        let backstate = parsedResponse['state'];
         console.log(parsedResponse);
         if (parsedResponse["access_token"] !== undefined && parsedResponse["access_token"] !== null) {
           let token = parsedResponse['access_token'];
           let backstate = parsedResponse['state'];
           console.log(backstate);
           console.log(token);
-          swal('Welcome!', "You have logged in successfully! You access toke is: " + token, 'success');
+          swal('Welcome!', "You have logged in successfully! You access token is: " + token, 'success');
         }
       }
     });
