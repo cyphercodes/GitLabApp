@@ -15,6 +15,7 @@ import {MomentModule} from "angular2-moment";
 import {Api} from "../common/services/Api";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {Auth} from "../common/services/Auth";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {Auth} from "../common/services/Auth";
     IonicModule.forRoot(MyApp),
     HttpModule,
     MomentModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
