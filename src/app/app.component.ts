@@ -4,7 +4,6 @@ import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
 
 import {HomePage} from "../pages/home/home";
-import {ListPage} from "../pages/list/list";
 import {
   MenuOptionModel,
   SideMenuContentComponent,
@@ -47,13 +46,16 @@ export class MyApp {
       } else {
         this.auth.logout();
       }
-    })
+    });
+    let firstTime = true;
     this.auth.authChanged.subscribe((data) => {
       if (data.isLoggedIn) {
         this.initializeOptions();
-        swal('Welcome!', 'You have logged in successfully!', 'success');
+        if (!firstTime) {
+          swal('Welcome!', 'You have logged in successfully!', 'success');
+        }
       } else {
-
+        this.nav.setRoot(HomePage);
       }
     });
     this.platform.ready().then(() => {
@@ -65,7 +67,6 @@ export class MyApp {
   }
 
   private initializeOptions(): void {
-    console.log('initializing');
     this.options = new Array<MenuOptionModel>();
 
     this.options.push({
@@ -77,75 +78,77 @@ export class MyApp {
 
     // Load options with nested items (with icons)
     // -----------------------------------------------
-    this.options.push({
-      displayName: 'Sub options with icons',
-      subItems: [
-        {
-          iconName: 'basket',
-          displayName: 'Sub Option 1',
-          component: ListPage
-        },
-      ]
-    });
+    // this.options.push({
+    //   displayName: 'Sub options with icons',
+    //   subItems: [
+    //     {
+    //       iconName: 'basket',
+    //       displayName: 'Sub Option 1',
+    //       component: ListPage
+    //     },
+    //   ]
+    // });
 
     // Load options with nested items (without icons)
     // -----------------------------------------------
-    this.options.push({
-      displayName: 'Sub options without icons',
-      subItems: [
-        {
-          displayName: 'Sub Option 4',
-          component: ListPage
-        },
-        {
-          displayName: 'Sub Option 5',
-          component: ListPage
-        },
-      ]
-    });
+    // this.options.push({
+    //   displayName: 'Sub options without icons',
+    //   subItems: [
+    //     {
+    //       displayName: 'Sub Option 4',
+    //       component: ListPage
+    //     },
+    //     {
+    //       displayName: 'Sub Option 5',
+    //       component: ListPage
+    //     },
+    //   ]
+    // });
 
     // Load special options
     // -----------------------------------------------
+    // this.options.push({
+    //   displayName: 'Special options',
+    //   subItems: [
+    //     {
+    //       iconName: 'log-in',
+    //       displayName: 'Login',
+    //       custom: {
+    //         isLogin: true
+    //       }
+    //     },
+    //     {
+    //       iconName: 'log-out',
+    //       displayName: 'Logout',
+    //       custom: {
+    //         isLogout: true
+    //       }
+    //     },
+    //     {
+    //       iconName: 'globe',
+    //       displayName: 'Open Google',
+    //       custom: {
+    //         isExternalLink: true,
+    //         externalUrl: 'http://www.google.com'
+    //       }
+    //     }
+    //   ]
+    // });
+
     this.options.push({
-      displayName: 'Special options',
-      subItems: [
-        {
-          iconName: 'log-in',
-          displayName: 'Login',
-          custom: {
-            isLogin: true
-          }
-        },
-        {
-          iconName: 'log-out',
-          displayName: 'Logout',
-          custom: {
-            isLogout: true
-          }
-        },
-        {
-          iconName: 'globe',
-          displayName: 'Open Google',
-          custom: {
-            isExternalLink: true,
-            externalUrl: 'http://www.google.com'
-          }
-        }
-      ]
+      iconName: 'unlock',
+      displayName: 'Logout',
+      custom: {
+        isLogout: true
+      }
     });
   }
 
   public selectOption(option: MenuOptionModel): void {
     this.menuCtrl.close().then(() => {
-      if (option.custom && option.custom.isLogin) {
-        // this.login();
-      } else if (option.custom && option.custom.isLogout) {
-        // this.presentAlert('You\'ve clicked the logout option!');
-      } else if (option.custom && option.custom.isExternalLink) {
-        let url = option.custom.externalUrl;
-        window.open(url, '_blank');
+      if (option.custom && option.custom.isLogout) {
+        this.auth.logout();
       } else {
-        // Redirect to the selected page
         this.nav.setRoot(option.component || HomePage, {'title': option.displayName});
       }
     });

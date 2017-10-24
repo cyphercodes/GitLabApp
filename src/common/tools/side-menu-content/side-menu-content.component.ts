@@ -8,7 +8,6 @@ import {
   ChangeDetectionStrategy,
   ViewChildren,
   QueryList,
-  NgZone,
   ChangeDetectorRef
 } from '@angular/core'; // tslint:disable-line
 
