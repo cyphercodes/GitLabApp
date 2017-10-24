@@ -8,6 +8,9 @@
       <button ion-button icon-only (click)="showSearch()">
         <ion-icon name="search"></ion-icon>
       </button>
+      <button ion-button icon-only (click)="auth.goLogin()">
+        <ion-icon name="lock"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar [hidden]="!showSearchBar">

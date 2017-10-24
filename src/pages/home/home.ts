@@ -1,6 +1,7 @@
 import {Component, ViewChild} from "@angular/core";
 import {NavController, Searchbar} from "ionic-angular";
 import {Api} from "../../common/services/Api";
+import {Auth} from "../../common/services/Auth";
 
 @Component({
   selector: 'page-home',
@@ -17,7 +18,7 @@ export class HomePage {
   spin = false;
   showSearchBar = false;
 
-  constructor(public navCtrl: NavController, protected api: Api) {
+  constructor(public navCtrl: NavController, public api: Api, public auth: Auth) {
 
   }
 
@@ -74,6 +75,4 @@ export class HomePage {
       this.searchbar.setFocus();
     }, 300)
   }
-
-
 }
