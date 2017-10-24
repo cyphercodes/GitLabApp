@@ -60,8 +60,6 @@ export class MyApp {
       iconName: 'home',
       displayName: 'Home',
       component: HomePage,
-
-      // This option is already selected
       selected: true
     });
 
@@ -151,7 +149,10 @@ export class MyApp {
     const state = Math.random().toString(36).substr(2, 8);
     const client_id = '46b1ed0c950b9445ece44639c2295c199675cfbc0fac3c355e3bd1ce8eca1e79';
     const redirect_uri = encodeURIComponent("http://localhost/auth");
-    const ref = this.iab.create('https://gitlab.com/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=token&state=' + state, "_blank");
+    const ref = this.iab.create('https://gitlab.com/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=token&state=' + state, "_blank", {
+      zoom: 'no',
+      location: 'no',
+    });
 
     ref.on('loadstart').subscribe((res) => {
       if ((res.url).indexOf("http://localhost/auth") === 0) {
