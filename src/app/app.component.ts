@@ -54,9 +54,11 @@ export class MyApp {
         if (!firstTime) {
           swal('Welcome!', 'You have logged in successfully!', 'success');
         }
+        firstTime = false;
       } else {
-        this.nav.setRoot(HomePage);
+        this.options = [];
       }
+      this.nav.setRoot(HomePage);
     });
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
