@@ -31,7 +31,7 @@ export class Auth {
 
   goLogin() {
     if (!this.platform.is('cordova')) {
-      this.login('123');
+      this.login('c3a4b2fe8dd7d7465373d8a019639a2732096d14865286d87b03e153de1640c4');
       return;
     }
     const state = Math.random().toString(36).substr(2, 8);

@@ -18,3 +18,20 @@
 .center {
   text-align: center;
 }
+
+.side-avatar {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.side-avatar img {
+  max-width: 35%;
+  border-radius: 100%;
+}
+
+div[data-letters]:before {
+  font-size: 36px;
+  width: 90px;
+  height: 90px;
+  line-height: 90px;
+}

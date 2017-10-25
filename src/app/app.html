@@ -6,6 +6,19 @@
   </ion-header>
 
   <ion-content>
+    <div *ngIf="project.has()">
+      <ion-list>
+        <button ion-item (click)="clearProject()">
+          <ion-icon name="arrow-back" item-start></ion-icon>
+          Go back
+        </button>
+      </ion-list>
+      <div class="side-avatar">
+        <img src="{{project.get().avatar_url}}" *ngIf="project.get().avatar_url">
+        <div [attr.data-letters]="project.get().name.charAt(0).toUpperCase()" *ngIf="!project.get().avatar_url"></div>
+        <h3 class="center">{{project.get().name}}</h3>
+      </div>
+    </div>
     <side-menu-content [settings]="sideMenuSettings" [options]="options"
                        (selectOption)="selectOption($event)"></side-menu-content>
   </ion-content>

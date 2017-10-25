@@ -12,6 +12,8 @@ import {
 import {Auth} from "../common/services/Auth";
 import {Storage} from "@ionic/storage";
 import swal from "sweetalert2";
+import {Project} from "../common/services/Project";
+import {ProjectPage} from "../pages/project/project";
 
 @Component({
   templateUrl: 'app.html'
@@ -35,7 +37,7 @@ export class MyApp {
     }
   };
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private menuCtrl: MenuController, private auth: Auth, private storage: Storage) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private menuCtrl: MenuController, private auth: Auth, private storage: Storage, private project: Project) {
     this.initializeApp();
   }
 
@@ -60,6 +62,14 @@ export class MyApp {
       }
       this.nav.setRoot(HomePage);
     });
+    this.project.changed.subscribe((data) => {
+      if (this.project.has()) {
+        this.nav.setRoot(ProjectPage);
+      } else {
+        this.nav.setRoot(HomePage);
+      }
+      this.initializeOptions();
+    });
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -70,13 +80,39 @@ export class MyApp {
 
   private initializeOptions(): void {
     this.options = new Array<MenuOptionModel>();
-
-    this.options.push({
-      iconName: 'home',
-      displayName: 'Home',
-      component: HomePage,
-      selected: true
-    });
+    if (!this.project.has()) {
+      this.options.push({
+        iconName: 'home',
+        displayName: 'Home',
+        component: HomePage,
+      });
+    } else {
+      this.options.push({
+        iconName: 'home',
+        displayName: 'Overview',
+        component: ProjectPage,
+      });
+      this.options.push({
+        iconName: 'copy',
+        displayName: 'Repository',
+        component: ProjectPage,
+      });
+      this.options.push({
+        iconName: 'paper',
+        displayName: 'Issues',
+        component: ProjectPage,
+      });
+      this.options.push({
+        iconName: 'git-pull-request',
+        displayName: 'Merge Requests',
+        component: ProjectPage,
+      });
+      this.options.push({
+        iconName: 'settings',
+        displayName: 'Settings',
+        component: ProjectPage,
+      });
+    }
 
     // Load options with nested items (with icons)
     // -----------------------------------------------
@@ -136,14 +172,15 @@ export class MyApp {
     //     }
     //   ]
     // });
-
-    this.options.push({
-      iconName: 'unlock',
-      displayName: 'Logout',
-      custom: {
-        isLogout: true
-      }
-    });
+    if (!this.project.has()) {
+      this.options.push({
+        iconName: 'unlock',
+        displayName: 'Logout',
+        custom: {
+          isLogout: true
+        }
+      });
+    }
   }
 
   public selectOption(option: MenuOptionModel): void {
@@ -159,5 +196,11 @@ export class MyApp {
   public collapseMenuOptions(): void {
     // Collapse all the options
     this.sideMenu.collapseAllOptions();
+  }
+
+  public clearProject() {
+    this.menuCtrl.close().then(() => {
+      this.project.clear();
+    });
   }
 }

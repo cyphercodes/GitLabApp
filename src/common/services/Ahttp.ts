@@ -1,42 +1,28 @@
 import {Injectable} from "@angular/core";
-import {Http, RequestOptions, RequestOptionsArgs} from "@angular/http";
+import {Headers, Http, RequestOptionsArgs} from "@angular/http";
 import {Observable} from "rxjs/Rx";
-// import swal from "sweetalert2";
+import {Auth} from "./Auth";
+import swal from "sweetalert2";
 
 @Injectable()
 export class Ahttp {
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private auth: Auth) {
   }
 
   public get(url: string, options?: RequestOptionsArgs): Observable<any> {
-    if (options === null || options === undefined) {
-      options = new RequestOptions();
+    if (this.auth.isLoggedIn) {
+      if (!options.headers) {
+        options.headers = new Headers();
+      }
+      options.headers.append('Authorization', 'Bearer ' + this.auth.token);
     }
 
-    // if (this.auth.isLoggedIn) {
-    //   options.headers.append('Authorization', 'Bearer ' + this.auth.token);
-    // }
-
-
     return this.http.get(url, options).catch((error: any) => {
-      if (error.status === 422 || error.status === 403) {
-        // const err = error.json();
-        // let errMsg = null;
-        // if (err.message) {
-        //   errMsg = err.message;
-        // } else if (err instanceof Array && err[0].message) {
-        //   errMsg = err[0].message;
-        // } else if (err.error) {
-        //   errMsg = err.error;
-        // } else {
-        //   if (err[Object.keys(err)[0]][0]) {
-        //     errMsg = err[Object.keys(err)[0]][0];
-        //   }
-        // }
-        // swal('Oops', errMsg, 'error');
+      if (error.status === 422 || error.status === 403 || error.status === 401) {
+        swal(error.statusText, error.json().message, 'error');
       }
-      return Observable.throw(error.json());
+      return Observable.throw(error);
     });
 
   }

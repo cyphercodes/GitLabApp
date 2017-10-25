@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{title?title:'Project'}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <p class="center" *ngIf="repoEmpty">The repository for this project is empty...</p>
+  <ion-list>
+    <ion-item *ngFor="let leaf of repoTree;">
+      <ion-icon name="folder" item-start *ngIf="leaf.type === 'tree'"></ion-icon>
+      <ion-icon name="document" item-start *ngIf="leaf.type !== 'tree'"></ion-icon>
+      {{leaf.name}}
+    </ion-item>
+  </ion-list>
+</ion-content>

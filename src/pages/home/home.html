@@ -23,15 +23,15 @@
 </ion-header>
 
 <ion-content>
-  <h3 padding-horizontal>GitLab App</h3>
+  <h3 padding-horizontal>{{auth.isLoggedIn?'My Projects':'Explore'}}</h3>
   <ion-list>
-    <ion-item *ngFor="let project of projects; let i = index">
+    <ion-item *ngFor="let project of projects; let i = index" (click)="goToProject(project)">
       <ion-avatar item-start *ngIf="project.avatar_url">
         <img src="{{project.avatar_url}}">
       </ion-avatar>
       <ion-avatar item-start *ngIf="!project.avatar_url" [attr.data-letters]="project.name.charAt(0).toUpperCase()">
       </ion-avatar>
-      <h2>{{project.name_with_namespace}}</h2>
+      <h2 text-wrap>{{project.name_with_namespace}}</h2>
       <p>{{project.description}}</p>
       <small>updated {{project.last_activity_at | amTimeAgo}}</small>
     </ion-item>
@@ -39,6 +39,12 @@
   <div class="center" *ngIf="spin">
     <ion-spinner></ion-spinner>
   </div>
+  <p class="center" *ngIf="!spin && projects.length < 1">
+    No projects found...
+  </p>
+  <p class="center" *ngIf="!spin && !infiniteScroll.enabled && infiniteScroll.state !='loading' && projects.length > 0">
+    End of results...
+  </p>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>

@@ -8,8 +8,12 @@ export class Api {
   constructor(private http: Ahttp) {
   }
 
-  getProjects(options) {
+  getProjects(options = {}) {
     return this.http.get(this.url + '/projects', options);
+  }
+
+  getRepoTree(id, options = {}) {
+    return this.http.get(this.url + '/projects/' + id + '/repository/tree', options);
   }
 
 }

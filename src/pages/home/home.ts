@@ -1,7 +1,8 @@
 import {Component, ViewChild} from "@angular/core";
-import {NavController, Searchbar} from "ionic-angular";
+import {InfiniteScroll, NavController, Searchbar} from "ionic-angular";
 import {Api} from "../../common/services/Api";
 import {Auth} from "../../common/services/Auth";
+import {Project} from "../../common/services/Project";
 
 @Component({
   selector: 'page-home',
@@ -9,7 +10,8 @@ import {Auth} from "../../common/services/Auth";
 })
 export class HomePage {
 
-  @ViewChild('searchbar') searchbar: Searchbar;
+  @ViewChild('searchbar') searchBar: Searchbar;
+  @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
 
   public search = '';
   projects = [];
@@ -18,8 +20,7 @@ export class HomePage {
   spin = false;
   showSearchBar = false;
 
-  constructor(public navCtrl: NavController, public api: Api, public auth: Auth) {
-
+  constructor(public navCtrl: NavController, public api: Api, public auth: Auth, public project: Project) {
   }
 
   ionViewDidLoad() {
@@ -38,6 +39,9 @@ export class HomePage {
   }
 
   doInfinite(infiniteScroll) {
+    if (this.infiniteScroll.enabled) {
+      return;
+    }
     this.page++;
     this.doSearch(false, infiniteScroll);
   }
@@ -46,25 +50,37 @@ export class HomePage {
     if (clear) {
       this.spin = true;
       this.projects = [];
-      this.page = 0;
+      this.page = 1;
+      this.infiniteScroll.enable(true);
     }
     if (this.request) {
       this.request.unsubscribe();
     }
+    let params = {
+      search: this.search.length > 0 ? this.search : '',
+      per_page: 10,
+      page: this.page,
+    };
+    if (this.auth.isLoggedIn) {
+      // params['owned'] = true;
+      params['membership'] = true;
+      // params['starred'] = true;
+    }
     this.request = this.api.getProjects({
-      params: {
-        search: this.search.length > 0 ? this.search : '',
-        per_page: 10,
-        page: this.page,
-      }
+      params: params
     }).subscribe(data => {
       let projs = data.json();
       for (let proj of projs) {
         this.projects.push(proj);
       }
+      if (projs.length < 1) {
+        this.infiniteScroll.enable(false);
+      }
       if (infiniteSearch) {
         infiniteSearch.complete();
       }
+      this.spin = false;
+    }, err => {
       this.spin = false;
     });
   }
@@ -72,7 +88,12 @@ export class HomePage {
   showSearch() {
     this.showSearchBar = true;
     setTimeout(() => {
-      this.searchbar.setFocus();
+      this.searchBar.setFocus();
     }, 300)
+  }
+
+  goToProject(project) {
+    console.log(project);
+    this.project.set(project);
   }
 }

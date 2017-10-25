@@ -16,6 +16,8 @@ import {Api} from "../common/services/Api";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {Auth} from "../common/services/Auth";
 import {IonicStorageModule} from "@ionic/storage";
+import {ProjectModule} from "../pages/project/project.module";
+import {Project} from "../common/services/Project";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import {IonicStorageModule} from "@ionic/storage";
     IonicModule.forRoot(MyApp),
     HttpModule,
     MomentModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ProjectModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -44,7 +47,8 @@ import {IonicStorageModule} from "@ionic/storage";
     Ahttp,
     Api,
     Auth,
-    InAppBrowser
+    InAppBrowser,
+    Project
   ]
 })
 export class AppModule {
