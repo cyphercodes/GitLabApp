@@ -13,6 +13,9 @@
   <p class="center" *ngIf="repoEmpty">The repository for this project is empty...</p>
   <div *ngIf="repoTree.length > 0">
     <ion-list class="repo-list">
+      <ion-item>
+        Name
+      </ion-item>
       <button ion-item *ngFor="let leaf of repoTree;">
         <ion-icon name="folder" item-start *ngIf="leaf.type === 'tree'"></ion-icon>
         <ion-icon name="document" item-start *ngIf="leaf.type !== 'tree'"></ion-icon>

@@ -3,7 +3,12 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title [hidden]="showSearchBar">Home</ion-title>
+    <ion-searchbar #searchbar
+                   [(ngModel)]="search"
+                   (ionInput)="onSearch($event)"
+                   (ionCancel)="onSearchCancel($event)" [hidden]="!showSearchBar">
+    </ion-searchbar>
     <ion-buttons end>
       <button ion-button icon-only (click)="showSearch()">
         <ion-icon name="search"></ion-icon>
@@ -13,13 +18,6 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar [hidden]="!showSearchBar">
-    <ion-searchbar #searchbar
-                   [(ngModel)]="search"
-                   (ionInput)="onSearch($event)"
-                   (ionCancel)="onSearchCancel($event)">
-    </ion-searchbar>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>

@@ -89,11 +89,10 @@ export class HomePage {
     this.showSearchBar = true;
     setTimeout(() => {
       this.searchBar.setFocus();
-    }, 300)
+    }, 150)
   }
 
   goToProject(project) {
-    console.log(project);
     this.project.set(project);
   }
 }

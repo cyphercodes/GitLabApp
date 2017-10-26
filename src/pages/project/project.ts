@@ -3,6 +3,7 @@ import {IonicPage, NavController} from "ionic-angular";
 import {Project} from "../../common/services/Project";
 import {Api} from "../../common/services/Api";
 import * as mdit from 'markdown-it';
+import * as mditHighlightjs from 'markdown-it-highlightjs';
 
 
 @IonicPage()
@@ -21,7 +22,11 @@ export class ProjectPage {
   }
 
   ionViewDidLoad() {
-    let md = new mdit();
+    let md = new mdit({
+      html: true,
+      linkify: true,
+      typographer: true,
+    }).use(mditHighlightjs);
     console.log(md);
     this.api.getRepoTree(this.project.get().id).subscribe((data) => {
       console.log(data.json());

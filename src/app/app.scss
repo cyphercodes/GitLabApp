@@ -14,6 +14,7 @@
 // automatically applied to the <body> element in the app.
 @import "../common/tools/letter-avatar/letter-avatar";
 @import '../../node_modules/sweetalert2/dist/sweetalert2';
+@import '../../node_modules/highlight.js/styles/github';
 
 .center {
   text-align: center;
@@ -37,23 +38,32 @@ div[data-letters]:before {
 }
 
 ion-list.repo-list {
-  border: 1px solid #dedede;
+  border-top: 1px solid #dedede;
+  border-bottom: 1px solid #dedede;
   font-size: 12px;
   ion-item.item-block .item-inner, button.item.item-block .item-inner {
     border-bottom: 0px;
   }
+  ion-item:first-child {
+    background-color: #fafafa;
+    font-size: 13px;
+    font-weight: normal;
+  }
   ion-item, button.item {
     border-bottom: 1px solid #dedede;
-    font-size: 14px;
-    min-height: 2.4rem;
+    font-size: 13px;
+    min-height: 31px;
+    font-weight: 100;
 
     ion-label {
       margin: 6px 8px 6px 0px;
     }
 
     ion-icon[item-left], ion-icon[item-right], ion-icon[item-start], ion-icon[item-end] {
-      margin-top: 5px;
-      margin-bottom: 4px;
+      margin-top: 2px;
+      font-size: 20px;
+      margin-bottom: 1px;
+      line-height: 2.8rem;
     }
     ion-icon[item-start] + .item-inner {
       margin-left: 10px;

@@ -64,7 +64,7 @@ export class MyApp {
     });
     this.project.changed.subscribe((data) => {
       if (this.project.has()) {
-        this.nav.setRoot(ProjectPage);
+        this.nav.push(ProjectPage);
       } else {
         this.nav.setRoot(HomePage);
       }
