@@ -66,7 +66,7 @@ export class MyApp {
       if (this.project.has()) {
         this.nav.push(ProjectPage);
       } else {
-        this.nav.setRoot(HomePage);
+        // this.nav.setRoot(HomePage);
       }
       this.initializeOptions();
     });
@@ -199,8 +199,6 @@ export class MyApp {
   }
 
   public clearProject() {
-    this.menuCtrl.close().then(() => {
-      this.project.clear();
-    });
+    this.nav.pop();
   }
 }
