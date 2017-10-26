@@ -35,3 +35,49 @@ div[data-letters]:before {
   height: 90px;
   line-height: 90px;
 }
+
+ion-list.repo-list {
+  border: 1px solid #dedede;
+  font-size: 12px;
+  ion-item.item-block .item-inner, button.item.item-block .item-inner {
+    border-bottom: 0px;
+  }
+  ion-item, button.item {
+    border-bottom: 1px solid #dedede;
+    font-size: 14px;
+    min-height: 2.4rem;
+
+    ion-label {
+      margin: 6px 8px 6px 0px;
+    }
+
+    ion-icon[item-left], ion-icon[item-right], ion-icon[item-start], ion-icon[item-end] {
+      margin-top: 5px;
+      margin-bottom: 4px;
+    }
+    ion-icon[item-start] + .item-inner {
+      margin-left: 10px;
+    }
+  }
+  ion-item:last-child, button.item:last-child {
+    border-bottom: 0px;
+  }
+}
+
+.panel {
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  .title {
+    background-color: #fafafa;
+    border-bottom: 1px solid #dedede;
+    padding: 10px 16px;
+    border-radius: 4px 4px 0 0;
+
+    ion-icon {
+      margin-right: 10px;
+    }
+  }
+  .body {
+    margin: 20px;
+  }
+}

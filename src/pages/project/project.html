@@ -11,11 +11,20 @@
 
 <ion-content padding>
   <p class="center" *ngIf="repoEmpty">The repository for this project is empty...</p>
-  <ion-list>
-    <ion-item *ngFor="let leaf of repoTree;">
-      <ion-icon name="folder" item-start *ngIf="leaf.type === 'tree'"></ion-icon>
-      <ion-icon name="document" item-start *ngIf="leaf.type !== 'tree'"></ion-icon>
-      {{leaf.name}}
-    </ion-item>
-  </ion-list>
+  <div *ngIf="repoTree.length > 0">
+    <ion-list class="repo-list">
+      <button ion-item *ngFor="let leaf of repoTree;">
+        <ion-icon name="folder" item-start *ngIf="leaf.type === 'tree'"></ion-icon>
+        <ion-icon name="document" item-start *ngIf="leaf.type !== 'tree'"></ion-icon>
+        {{leaf.name}}
+      </button>
+    </ion-list>
+  </div>
+  <div *ngIf="this.readme" class="panel">
+    <div class="title">
+      <ion-icon name="document"></ion-icon>
+      {{rmfile.file_name}}
+    </div>
+    <div class="body" [innerHTML]="readme"></div>
+  </div>
 </ion-content>

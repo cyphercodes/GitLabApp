@@ -25,7 +25,7 @@
 <ion-content>
   <h3 padding-horizontal>{{auth.isLoggedIn?'My Projects':'Explore'}}</h3>
   <ion-list>
-    <ion-item *ngFor="let project of projects; let i = index" (click)="goToProject(project)">
+    <button ion-item *ngFor="let project of projects; let i = index" (click)="goToProject(project)">
       <ion-avatar item-start *ngIf="project.avatar_url">
         <img src="{{project.avatar_url}}">
       </ion-avatar>
@@ -34,7 +34,7 @@
       <h2 text-wrap>{{project.name_with_namespace}}</h2>
       <p>{{project.description}}</p>
       <small>updated {{project.last_activity_at | amTimeAgo}}</small>
-    </ion-item>
+    </button>
   </ion-list>
   <div class="center" *ngIf="spin">
     <ion-spinner></ion-spinner>
