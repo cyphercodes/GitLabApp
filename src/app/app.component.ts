@@ -199,6 +199,7 @@ export class MyApp {
   }
 
   public clearProject() {
+    this.menuCtrl.close();
     this.nav.pop();
   }
 }

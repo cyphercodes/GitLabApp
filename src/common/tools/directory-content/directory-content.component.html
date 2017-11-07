@@ -1,0 +1,10 @@
+<ion-list class="repo-list">
+  <ion-item>
+    Name
+  </ion-item>
+  <button ion-item *ngFor="let leaf of repoTree" (click)="goToDirectory(leaf)">
+    <ion-icon name="folder" item-start *ngIf="leaf.type === 'tree'"></ion-icon>
+    <ion-icon name="document" item-start *ngIf="leaf.type !== 'tree'"></ion-icon>
+    {{leaf.name}}
+  </button>
+</ion-list>

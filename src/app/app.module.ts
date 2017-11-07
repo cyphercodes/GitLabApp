@@ -18,13 +18,14 @@ import {Auth} from "../common/services/Auth";
 import {IonicStorageModule} from "@ionic/storage";
 import {ProjectModule} from "../pages/project/project.module";
 import {Project} from "../common/services/Project";
+import {DirectoryPage} from "../pages/project/directory/directory";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    SideMenuContentComponent,
+    SideMenuContentComponent
   ],
   imports: [
     BrowserModule,

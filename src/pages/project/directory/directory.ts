@@ -1,41 +1,41 @@
-import {Component, ViewChild} from "@angular/core";
-import {IonicPage, Navbar, NavController} from "ionic-angular";
-import {Project} from "../../common/services/Project";
-import {Api} from "../../common/services/Api";
+import {Component} from "@angular/core";
+import {NavParams} from "ionic-angular";
+import {Project} from "../../../common/services/Project";
+import {Api} from "../../../common/services/Api";
 import * as mdit from "markdown-it";
 import * as mditHighlightjs from "markdown-it-highlightjs";
 
-
-@IonicPage()
 @Component({
-  selector: 'page-project',
-  templateUrl: 'project.html',
+  selector: 'page-directory',
+  templateUrl: 'directory.html',
 })
-export class ProjectPage {
-
-  @ViewChild(Navbar) navBar: Navbar;
+export class DirectoryPage {
 
   title: string;
   repoEmpty = false;
   repoTree = [];
   readme = null;
   rmfile = null;
+  repoDir;
 
-  constructor(public navCtrl: NavController, public project: Project, private api: Api) {
+  constructor(public project: Project, private api: Api, private navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    this.navBar.backButtonClick = (e: UIEvent) => {
-      this.project.clear();
-      this.navCtrl.pop();
-    }
+    this.repoDir = this.navParams.get("dir");
+    console.log(this.repoDir);
+
     let md = new mdit({
       html: true,
       linkify: true,
       typographer: true,
     }).use(mditHighlightjs);
-    console.log(md);
-    this.api.getRepoTree(this.project.get().id).subscribe((data) => {
+
+    this.api.getRepoTree(this.project.get().id, {
+      params: {
+        path: this.repoDir.path
+      }
+    }).subscribe((data) => {
       console.log(data.json());
       this.repoTree = data.json();
       this.api.getReadme(this.project.get().id, {
