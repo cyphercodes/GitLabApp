@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title?title:'File'}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="panel">
+    <div class="title">
+      <ion-icon name="document"></ion-icon>
+      {{title?title:'File'}}
+    </div>
+    <div class="body">
+      <pre><code #code [textContent]="content"></code></pre>
+    </div>
+  </div>
+</ion-content>

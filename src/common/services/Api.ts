@@ -24,4 +24,9 @@ export class Api {
     return this.http.get(this.url + '/projects/' + id + '/repository/files/' + path + readme, options);
   }
 
+  getFile(id, path, options = {}) {
+    path = encodeURIComponent(path);
+    return this.http.get(this.url + '/projects/' + id + '/repository/files/' + path, options);
+  }
+
 }

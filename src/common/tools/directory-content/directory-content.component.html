@@ -2,7 +2,7 @@
   <ion-item>
     Name
   </ion-item>
-  <button ion-item *ngFor="let leaf of repoTree" (click)="goToDirectory(leaf)">
+  <button ion-item *ngFor="let leaf of repoTree" (click)="goTo(leaf)">
     <ion-icon name="folder" item-start *ngIf="leaf.type === 'tree'"></ion-icon>
     <ion-icon name="document" item-start *ngIf="leaf.type !== 'tree'"></ion-icon>
     {{leaf.name}}
