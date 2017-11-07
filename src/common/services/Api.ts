@@ -16,9 +16,12 @@ export class Api {
     return this.http.get(this.url + '/projects/' + id + '/repository/tree', options);
   }
 
-  getReadme(id, options = {}) {
+  getReadme(id, path = '', options = {}) {
+    if (!path) {
+      path = '';
+    }
     const readme = encodeURIComponent('README.md');
-    return this.http.get(this.url + '/projects/' + id + '/repository/files/' + readme, options);
+    return this.http.get(this.url + '/projects/' + id + '/repository/files/' + path + readme, options);
   }
 
 }

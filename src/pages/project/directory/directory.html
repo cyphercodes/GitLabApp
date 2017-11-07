@@ -1,9 +1,6 @@
 <ion-header>
-  <ion-navbar hideBackButton>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>{{title?title:'Project'}}</ion-title>
+  <ion-navbar>
+    <ion-title>{{title?title:'Directory'}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -12,16 +9,6 @@
   <p class="center" *ngIf="repoEmpty">The repository for this project is empty...</p>
   <div *ngIf="repoTree.length > 0">
     <directory-content [repoTree]="repoTree"></directory-content>
-    <!--<ion-list class="repo-list">-->
-    <!--<ion-item>-->
-    <!--Name-->
-    <!--</ion-item>-->
-    <!--<button ion-item *ngFor="let leaf of repoTree;">-->
-    <!--<ion-icon name="folder" item-start *ngIf="leaf.type === 'tree'"></ion-icon>-->
-    <!--<ion-icon name="document" item-start *ngIf="leaf.type !== 'tree'"></ion-icon>-->
-    <!--{{leaf.name}}-->
-    <!--</button>-->
-    <!--</ion-list>-->
   </div>
   <div *ngIf="this.readme" class="panel">
     <div class="title">

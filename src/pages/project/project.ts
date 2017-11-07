@@ -38,7 +38,7 @@ export class ProjectPage {
     this.api.getRepoTree(this.project.get().id).subscribe((data) => {
       console.log(data.json());
       this.repoTree = data.json();
-      this.api.getReadme(this.project.get().id, {
+      this.api.getReadme(this.project.get().id, null, {
         params: {ref: 'master'}
       }).subscribe((data) => {
         this.rmfile = data.json();

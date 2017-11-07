@@ -24,6 +24,7 @@ export class DirectoryPage {
   ionViewDidLoad() {
     this.repoDir = this.navParams.get("dir");
     console.log(this.repoDir);
+    this.title = this.repoDir.path;
 
     let md = new mdit({
       html: true,
@@ -38,7 +39,7 @@ export class DirectoryPage {
     }).subscribe((data) => {
       console.log(data.json());
       this.repoTree = data.json();
-      this.api.getReadme(this.project.get().id, {
+      this.api.getReadme(this.project.get().id, this.repoDir.path, {
         params: {ref: 'master'}
       }).subscribe((data) => {
         this.rmfile = data.json();
