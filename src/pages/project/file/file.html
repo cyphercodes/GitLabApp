@@ -12,7 +12,7 @@
       {{remote_file?remote_file.file_name:'File'}}
     </div>
     <div class="body">
-      <pre (show)="showCode"><code #code [textContent]="content"></code></pre>
+      <pre><code [innerHtml]="content"></code></pre>
     </div>
   </div>
 </ion-content>

@@ -1,12 +1,48 @@
 page-file {
   .panel .body {
     margin: 10px;
+    margin-top: 0px;
+    margin: 0px;
   }
   pre {
     padding: 0px;
+    margin: 0px;
   }
   code.hljs {
     background-color: #fff;
     padding: 0px;
   }
+  span.line {
+    float: left;
+    clear: left;
+  }
+
+  code {
+    counter-reset: line;
+  }
+
+  span.line {
+    counter-increment: line;
+  }
+
+  span.line::before {
+    content: counter(line);
+    display: inline-block;
+    min-width: 1.6em; /* Fixed width */
+    border-right: 1px solid #f0f0f0;;
+    padding: 0 .4em;
+    margin-right: .5em;
+    -webkit-user-select: none;
+    text-align: right;
+    background-color: #fafafa;
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+  span.line:first-child::before {
+    padding-top: 5px;
+  }
+  span.line:last-child::before {
+    padding-bottom: 5px;
+  }
+
 }
