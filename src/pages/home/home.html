@@ -21,7 +21,7 @@
 </ion-header>
 
 <ion-content>
-  <h3 padding-horizontal>{{auth.isLoggedIn?'My Projects':'Explore'}}</h3>
+  <h3 padding-horizontal>{{(auth.isLoggedIn && search.length < 1)?'My Projects':'Explore'}}</h3>
   <ion-list>
     <button ion-item *ngFor="let project of projects; let i = index" (click)="goToProject(project)">
       <ion-avatar item-start *ngIf="project.avatar_url">

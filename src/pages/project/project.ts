@@ -4,6 +4,7 @@ import {Project} from "../../common/services/Project";
 import {Api} from "../../common/services/Api";
 import * as mdit from "markdown-it";
 import * as mditHighlightjs from "markdown-it-highlightjs";
+import {RepoTools} from "../../common/tools/repo-tools/repo-tools";
 
 
 @IonicPage()
@@ -21,10 +22,11 @@ export class ProjectPage {
   readme = null;
   rmfile = null;
 
-  constructor(public navCtrl: NavController, public project: Project, private api: Api) {
+  constructor(public navCtrl: NavController, public project: Project, private api: Api, private repoTools: RepoTools) {
   }
 
   ionViewDidLoad() {
+    console.log(this.project.get());
     this.navBar.backButtonClick = (e: UIEvent) => {
       this.project.clear();
       this.navCtrl.pop();
@@ -34,18 +36,21 @@ export class ProjectPage {
       linkify: true,
       typographer: true,
     }).use(mditHighlightjs);
-    console.log(md);
     this.api.getRepoTree(this.project.get().id).subscribe((data) => {
       console.log(data.json());
       this.repoTree = data.json();
-      this.api.getReadme(this.project.get().id, null, {
-        params: {ref: 'master'}
-      }).subscribe((data) => {
-        this.rmfile = data.json();
-        this.readme = md.render(atob(this.rmfile.content));
-      }, err => {
-        console.log(err);
-      });
+      let readmeFile;
+      if (readmeFile = this.repoTools.find_readme(this.repoTree)) {
+        this.api.getFile(this.project.get().id, readmeFile.path, {
+          params: {ref: 'master'}
+        }).subscribe((data) => {
+          this.rmfile = data.json();
+          let fileContent = this.repoTools.process_md_content(this.rmfile.content, this.project.get().web_url);
+          this.readme = md.render(fileContent);
+        }, err => {
+          console.log(err);
+        });
+      }
     }, (err) => {
       if (err.status === 404) {
         this.repoEmpty = true;

@@ -18,6 +18,7 @@ import {Auth} from "../common/services/Auth";
 import {IonicStorageModule} from "@ionic/storage";
 import {ProjectModule} from "../pages/project/project.module";
 import {Project} from "../common/services/Project";
+import {RepoTools} from "../common/tools/repo-tools/repo-tools";
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {Project} from "../common/services/Project";
     Api,
     Auth,
     InAppBrowser,
-    Project
+    Project,
+    RepoTools
   ]
 })
 export class AppModule {

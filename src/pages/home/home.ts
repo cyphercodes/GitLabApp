@@ -65,10 +65,11 @@ export class HomePage {
       per_page: 10,
       page: this.page,
     };
-    if (this.auth.isLoggedIn) {
+    if (this.auth.isLoggedIn && this.search.length < 1) {
       // params['owned'] = true;
       params['membership'] = true;
       // params['starred'] = true;
+      
     }
     this.request = this.api.getProjects({
       params: params

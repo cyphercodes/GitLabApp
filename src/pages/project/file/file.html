@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{title?title:'File'}}</ion-title>
+    <ion-title>{{remote_file?remote_file.file_path:'File'}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -9,10 +9,10 @@
   <div class="panel">
     <div class="title">
       <ion-icon name="document"></ion-icon>
-      {{title?title:'File'}}
+      {{remote_file?remote_file.file_name:'File'}}
     </div>
     <div class="body">
-      <pre><code #code [textContent]="content"></code></pre>
+      <pre (show)="showCode"><code #code [textContent]="content"></code></pre>
     </div>
   </div>
 </ion-content>

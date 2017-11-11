@@ -13,6 +13,7 @@ export class FilePage {
   file = null;
   remote_file = null;
   content = '';
+  showCode = false;
 
   constructor(public project: Project, private navParams: NavParams, private api: Api) {
   }
@@ -26,6 +27,7 @@ export class FilePage {
       this.content = atob(this.remote_file.content);
       setTimeout(() => {
         hljs.highlightBlock(this.codeElement.nativeElement);
+        this.showCode = true;
       }, 1)
     }, (err) => {
 

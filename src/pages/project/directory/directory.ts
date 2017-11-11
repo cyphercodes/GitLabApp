@@ -4,6 +4,7 @@ import {Project} from "../../../common/services/Project";
 import {Api} from "../../../common/services/Api";
 import * as mdit from "markdown-it";
 import * as mditHighlightjs from "markdown-it-highlightjs";
+import {RepoTools} from "../../../common/tools/repo-tools/repo-tools";
 
 @Component({
   selector: 'page-directory',
@@ -18,7 +19,7 @@ export class DirectoryPage {
   rmfile = null;
   repoDir;
 
-  constructor(public project: Project, private api: Api, private navParams: NavParams) {
+  constructor(public project: Project, private api: Api, private navParams: NavParams, private repoTools: RepoTools) {
   }
 
   ionViewDidLoad() {
@@ -39,14 +40,18 @@ export class DirectoryPage {
     }).subscribe((data) => {
       console.log(data.json());
       this.repoTree = data.json();
-      this.api.getReadme(this.project.get().id, this.repoDir.path, {
-        params: {ref: 'master'}
-      }).subscribe((data) => {
-        this.rmfile = data.json();
-        this.readme = md.render(atob(this.rmfile.content));
-      }, err => {
-        console.log(err);
-      });
+      let readmeFile;
+      if (readmeFile = this.repoTools.find_readme(this.repoTree)) {
+        this.api.getFile(this.project.get().id, readmeFile.path, {
+          params: {ref: 'master'}
+        }).subscribe((data) => {
+          this.rmfile = data.json();
+          let fileContent = this.repoTools.process_md_content(this.rmfile.content, this.project.get().web_url);
+          this.readme = md.render(fileContent);
+        }, err => {
+          console.log(err);
+        });
+      }
     }, (err) => {
       if (err.status === 404) {
         this.repoEmpty = true;

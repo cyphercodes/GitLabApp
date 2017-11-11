@@ -1,3 +1,12 @@
 page-file {
-
+  .panel .body {
+    margin: 10px;
+  }
+  pre {
+    padding: 0px;
+  }
+  code.hljs {
+    background-color: #fff;
+    padding: 0px;
+  }
 }
