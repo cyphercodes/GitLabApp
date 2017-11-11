@@ -3,3 +3,36 @@
 
 # GitlabApp 
 An open source Gitlab client app for IOS and Android built with Ionic Framework.
+
+## How to clone and initialize this project
+
+```bash
+$ git clone https://gitlab.com/CypherTulip/WhoIMet/WhoIMetIonic.git
+$ cd WhoIMetIonic
+$ npm update
+```
+
+Then you can run:
+
+```bash
+$ ionic serve
+```
+
+
+## How to make changes or work on the project 
+
+Each time you want to work on the project, make sure you pull the latest version to your local machine by running:
+
+```bash
+$ git pull
+```
+
+Then, start coding.
+
+When you are done, run the commands below to push back the changes:
+
+```bash
+$ git add .
+$ git commit -m 'ENTER A MESSAGE HERE (WHAT DID YOU CHANGE, WHAT IS THE ISSUE REFERENCE NUMBER #XXX)'
+$ git push
+```
