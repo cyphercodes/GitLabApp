@@ -14,7 +14,6 @@ export class DirectoryContentComponent {
   }
 
   goTo(path) {
-    console.log(path);
     if (path.type == "tree") {
       this.navCtrl.push(DirectoryPage, {dir: path});
     } else {

@@ -26,7 +26,6 @@ export class ProjectPage {
   }
 
   ionViewDidLoad() {
-    console.log(this.project.get());
     this.navBar.backButtonClick = (e: UIEvent) => {
       this.project.clear();
       this.navCtrl.pop();
@@ -37,7 +36,6 @@ export class ProjectPage {
       typographer: true,
     }).use(mditHighlightjs);
     this.api.getRepoTree(this.project.get().id).subscribe((data) => {
-      console.log(data.json());
       this.repoTree = data.json();
       let readmeFile;
       if (readmeFile = this.repoTools.find_readme(this.repoTree)) {
