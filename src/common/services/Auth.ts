@@ -1,7 +1,6 @@
 import {EventEmitter, Injectable} from "@angular/core";
 import {Storage} from "@ionic/storage";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
-import {Platform} from "ionic-angular";
 
 @Injectable()
 export class Auth {
@@ -9,7 +8,7 @@ export class Auth {
   isLoggedIn: boolean = false;
   token: string = '';
 
-  constructor(private storage: Storage, private iab: InAppBrowser, private platform: Platform) {
+  constructor(private storage: Storage, private iab: InAppBrowser) {
   }
 
   login(token: any, silent: boolean = false) {
@@ -30,10 +29,6 @@ export class Auth {
   }
 
   goLogin() {
-    if (!this.platform.is('cordova')) {
-      this.login('c3a4b2fe8dd7d7465373d8a019639a2732096d14865286d87b03e153de1640c4');
-      return;
-    }
     const state = Math.random().toString(36).substr(2, 8);
     const client_id = '46b1ed0c950b9445ece44639c2295c199675cfbc0fac3c355e3bd1ce8eca1e79';
     const redirect_uri = encodeURIComponent("http://localhost/auth");
