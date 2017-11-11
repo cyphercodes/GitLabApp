@@ -5,7 +5,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <p class="center" *ngIf="repoEmpty">The repository for this project is empty...</p>
   <div *ngIf="repoTree.length > 0">
     <directory-content [repoTree]="repoTree"></directory-content>

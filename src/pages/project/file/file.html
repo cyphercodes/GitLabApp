@@ -5,14 +5,15 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <div class="panel">
     <div class="title">
       <ion-icon name="document"></ion-icon>
       {{remote_file?remote_file.file_name:'File'}}
     </div>
     <div class="body">
-      <pre><code [innerHtml]="content"></code></pre>
+      <pre *ngIf="type =='file'" [innerHtml]="content"></pre>
+      <img *ngIf="type == 'img'" [src]="content">
     </div>
   </div>
 </ion-content>

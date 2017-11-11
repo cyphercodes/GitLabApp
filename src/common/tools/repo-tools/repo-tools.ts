@@ -1,7 +1,13 @@
 import {Injectable} from "@angular/core";
+import * as hljs from "highlight.js";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Injectable()
 export class RepoTools {
+
+  constructor(private sanitizer: DomSanitizer) {
+
+  }
 
   b64DecodeUnicode(str: string): string {
     return decodeURIComponent(Array.prototype.map.call(atob(str), function (c) {
@@ -29,6 +35,35 @@ export class RepoTools {
       }
     }
     return null;
+  }
+
+  fix_file_content(content: string) {
+    let tmpContent;
+    tmpContent = hljs.highlightAuto(this.b64DecodeUnicode(content)).value;
+    tmpContent = '<code>' + tmpContent;
+    tmpContent = tmpContent.replace(/(?:\r\n|\r|\n)/g, '</code><code>');
+    tmpContent = tmpContent + "</code>";
+    return tmpContent;
+  }
+
+  is_image(filename: string) {
+    let exts = ["jpeg", "jpg", "png", "gif"];
+    let itIs = false;
+    for (let ext of exts) {
+      if (filename.endsWith(ext)) {
+        itIs = true;
+      }
+    }
+    return itIs;
+  }
+
+  get_ext(filename: string) {
+    let chunks = filename.split(".");
+    return chunks[chunks.length - 1];
+  }
+
+  build_img_src(file) {
+    return this.sanitizer.bypassSecurityTrustUrl("data:image/" + this.get_ext(file.file_name) + ";base64, " + file.content);
   }
 
 }
