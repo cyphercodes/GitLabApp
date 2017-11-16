@@ -1,19 +1,20 @@
-import {Component, ViewChild} from "@angular/core";
-import {MenuController, Nav, Platform} from "ionic-angular";
-import {StatusBar} from "@ionic-native/status-bar";
-import {SplashScreen} from "@ionic-native/splash-screen";
+import { Component, ViewChild } from "@angular/core";
+import { MenuController, Nav, Platform } from "ionic-angular";
+import { StatusBar } from "@ionic-native/status-bar";
+import { SplashScreen } from "@ionic-native/splash-screen";
 
-import {HomePage} from "../pages/home/home";
+import { HomePage } from "../pages/home/home";
 import {
   MenuOptionModel,
   SideMenuContentComponent,
   SideMenuSettings
 } from "../common/tools/side-menu-content/side-menu-content.component";
-import {Auth} from "../common/services/Auth";
-import {Storage} from "@ionic/storage";
+import { Auth } from "../common/services/Auth";
+import { Storage } from "@ionic/storage";
 import swal from "sweetalert2";
-import {Project} from "../common/services/Project";
-import {ProjectPage} from "../pages/project/project";
+import { Project } from "../common/services/Project";
+import { ProjectPage } from "../pages/project/project";
+import { IssuesPage } from "../pages/project/issues/issues";
 
 @Component({
   templateUrl: 'app.html'
@@ -100,7 +101,7 @@ export class MyApp {
       this.options.push({
         iconName: 'paper',
         displayName: 'Issues',
-        component: ProjectPage,
+        component: IssuesPage,
       });
       this.options.push({
         iconName: 'git-pull-request',
@@ -188,7 +189,7 @@ export class MyApp {
       if (option.custom && option.custom.isLogout) {
         this.auth.logout();
       } else {
-        this.nav.setRoot(option.component || HomePage, {'title': option.displayName});
+        this.nav.setRoot(option.component || HomePage, { 'title': option.displayName });
       }
     });
   }
