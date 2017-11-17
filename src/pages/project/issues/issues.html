@@ -1,6 +1,9 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title> {{displayName}} </ion-title>
+    <ion-navbar hideBackButton>
+        <button ion-button menuToggle>
+         <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title> {{title?title:'Issues'}} </ion-title>
     </ion-navbar>
 </ion-header>
 
@@ -10,12 +13,12 @@
         <ion-item *ngFor="let item of itemList">
             <h2> {{item.title}} </h2>
             <p> # {{item.id}} {{item.text}} <b>Rayan Salhab</b>
+                <!--<span class: "Todo" title="" data-container="body">To Do</span>-->
                 <span style="background-color: #F0AD4E;color: #FFFFFF;padding: 3px 7px;border-radius: 100px;" title="" data-container="body">To Do</span>
             </p>
-
             <ion-icon name="thumbs-up" item-end></ion-icon>
             <ion-icon name="ios-chatbubbles" item-end></ion-icon>
-            <span style="float:right !important;">{{item.date}}</span>
+            <span item-end>{{item.date}}</span>
         </ion-item>
     </ion-list>
 </ion-content>

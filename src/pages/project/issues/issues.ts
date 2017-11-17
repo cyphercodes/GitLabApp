@@ -5,7 +5,8 @@ import { Component } from "@angular/core";
     templateUrl: 'issues.html',
 })
 export class IssuesPage {
-    displayName = 'Issues';
+
+    title: string;
     itemList = [{
         id: 8,
         title: "SQLite",
