@@ -1,5 +1,11 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton *ngIf="path == '/'">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{title?title:'Project'}}</ion-title>
+  </ion-navbar>
+  <ion-navbar *ngIf="path != '/'">
     <ion-title>{{title?title:'Directory'}}</ion-title>
   </ion-navbar>
 </ion-header>

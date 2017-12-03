@@ -24,7 +24,7 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    this.project.clear();
+    // this.project.clear();
   }
 
   ionViewDidLoad() {
@@ -69,7 +69,7 @@ export class HomePage {
       // params['owned'] = true;
       params['membership'] = true;
       // params['starred'] = true;
-      
+
     }
     this.request = this.api.getProjects({
       params: params

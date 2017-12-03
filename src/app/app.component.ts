@@ -1,20 +1,21 @@
-import { Component, ViewChild } from "@angular/core";
-import { MenuController, Nav, Platform } from "ionic-angular";
-import { StatusBar } from "@ionic-native/status-bar";
-import { SplashScreen } from "@ionic-native/splash-screen";
+import {Component, ViewChild} from "@angular/core";
+import {MenuController, Nav, Platform} from "ionic-angular";
+import {StatusBar} from "@ionic-native/status-bar";
+import {SplashScreen} from "@ionic-native/splash-screen";
 
-import { HomePage } from "../pages/home/home";
+import {HomePage} from "../pages/home/home";
 import {
   MenuOptionModel,
   SideMenuContentComponent,
   SideMenuSettings
 } from "../common/tools/side-menu-content/side-menu-content.component";
-import { Auth } from "../common/services/Auth";
-import { Storage } from "@ionic/storage";
+import {Auth} from "../common/services/Auth";
+import {Storage} from "@ionic/storage";
 import swal from "sweetalert2";
-import { Project } from "../common/services/Project";
-import { ProjectPage } from "../pages/project/project";
-import { IssuesPage } from "../pages/project/issues/issues";
+import {Project} from "../common/services/Project";
+import {ProjectPage} from "../pages/project/project";
+import {IssuesPage} from "../pages/project/issues/issues";
+import {DirectoryPage} from "../pages/project/directory/directory";
 
 @Component({
   templateUrl: 'app.html'
@@ -96,7 +97,7 @@ export class MyApp {
       this.options.push({
         iconName: 'copy',
         displayName: 'Repository',
-        component: ProjectPage,
+        component: DirectoryPage,
       });
       this.options.push({
         iconName: 'paper',
@@ -189,7 +190,9 @@ export class MyApp {
       if (option.custom && option.custom.isLogout) {
         this.auth.logout();
       } else {
-        this.nav.setRoot(option.component || HomePage, { 'title': option.displayName });
+        this.nav.popToRoot({animate: false});
+        this.nav.push(option.component || HomePage, {'title': option.displayName}, {animate: false});
+        // this.nav.setRoot(option.component || HomePage, { 'title': option.displayName });
       }
     });
   }

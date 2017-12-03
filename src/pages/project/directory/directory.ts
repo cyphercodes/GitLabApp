@@ -18,6 +18,7 @@ export class DirectoryPage {
   readme = null;
   rmfile = null;
   repoDir;
+  path = null;
 
   constructor(public project: Project, private api: Api, private navParams: NavParams, private repoTools: RepoTools) {
   }
@@ -25,7 +26,12 @@ export class DirectoryPage {
   ionViewDidLoad() {
     this.repoDir = this.navParams.get("dir");
     console.log(this.repoDir);
-    this.title = this.repoDir.path;
+    if (this.repoDir) {
+      this.title = this.repoDir.path;
+      this.path = this.repoDir.path;
+    } else {
+      this.path = '/'
+    }
 
     let md = new mdit({
       html: true,
@@ -35,7 +41,7 @@ export class DirectoryPage {
 
     this.api.getRepoTree(this.project.get().id, {
       params: {
-        path: this.repoDir.path
+        path: this.path
       }
     }).subscribe((data) => {
       console.log(data.json());

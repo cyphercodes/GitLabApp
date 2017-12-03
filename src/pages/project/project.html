@@ -8,11 +8,21 @@
 </ion-header>
 
 <ion-content>
+  <div class="center-avatar" padding-horizontal>
+    <img src="{{project.get().avatar_url}}" *ngIf="project.get().avatar_url">
+    <div [attr.data-letters]="project.get().name.charAt(0).toUpperCase()" *ngIf="!project.get().avatar_url"></div>
+    <h3 class="center">{{project.get().name}}</h3>
+    <p class="center">{{project.get().description}}</p>
+  </div>
   <p class="center" *ngIf="repoEmpty">The repository for this project is empty...</p>
+  <p class="center">
+    Stars: {{proj?.star_count}}
+    Forks: {{proj?.forks_count}}
+  </p>
   <div *ngIf="repoTree.length > 0">
     <directory-content [repoTree]="repoTree"></directory-content>
   </div>
-  <div *ngIf="this.readme" class="panel">
+  <div *ngIf="readme" class="panel">
     <div class="title">
       <ion-icon name="document"></ion-icon>
       {{rmfile.file_name}}

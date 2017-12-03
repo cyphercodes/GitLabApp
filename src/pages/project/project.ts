@@ -21,15 +21,18 @@ export class ProjectPage {
   repoTree = [];
   readme = null;
   rmfile = null;
+  proj = null;
 
   constructor(public navCtrl: NavController, public project: Project, private api: Api, private repoTools: RepoTools) {
   }
 
   ionViewDidLoad() {
-    this.navBar.backButtonClick = (e: UIEvent) => {
+    console.log(this.project.get());
+    this.proj = this.project.get();
+    this.navBar.backButtonClick = ((e: UIEvent) => {
       this.project.clear();
       this.navCtrl.pop();
-    }
+    });
     let md = new mdit({
       html: true,
       linkify: true,
