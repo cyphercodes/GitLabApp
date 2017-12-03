@@ -1,7 +1,7 @@
 import {Component, Input} from "@angular/core";
 import {NavController} from "ionic-angular";
-import {DirectoryPage} from "../../../pages/project/directory/directory";
-import {FilePage} from "../../../pages/project/file/file";
+import {DirectoryPage} from "../../../pages/project/repository/directory/directory";
+import {FilePage} from "../../../pages/project/repository/file/file";
 @Component({
   selector: 'directory-content',
   templateUrl: 'directory-content.component.html',

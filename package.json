@@ -28,6 +28,7 @@
     "@types/highlight.js": "^9.1.10",
     "angular2-moment": "^1.7.0",
     "cordova-plugin-inappbrowser": "^1.7.1",
+    "diff2html": "^2.3.2",
     "highlightjs": "^9.10.0",
     "ionic-angular": "3.7.1",
     "ionicons": "3.0.0",

@@ -15,7 +15,8 @@ import swal from "sweetalert2";
 import {Project} from "../common/services/Project";
 import {ProjectPage} from "../pages/project/project";
 import {IssuesPage} from "../pages/project/issues/issues";
-import {DirectoryPage} from "../pages/project/directory/directory";
+import {DirectoryPage} from "../pages/project/repository/directory/directory";
+import {CommitsPage} from "../pages/project/repository/commits/commits";
 
 @Component({
   templateUrl: 'app.html'
@@ -95,9 +96,20 @@ export class MyApp {
         component: ProjectPage,
       });
       this.options.push({
-        iconName: 'copy',
+        // iconName: 'copy',
         displayName: 'Repository',
-        component: DirectoryPage,
+        subItems: [
+          {
+            displayName: 'Files',
+            iconName: 'copy',
+            component: DirectoryPage
+          },
+          {
+            displayName: 'Commits',
+            iconName: 'git-commit',
+            component: CommitsPage
+          },
+        ]
       });
       this.options.push({
         iconName: 'paper',

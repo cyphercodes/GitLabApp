@@ -5,7 +5,6 @@ import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
 import {MyApp} from "./app.component";
 import {HomePage} from "../pages/home/home";
 import {ListPage} from "../pages/list/list";
-import {IssuesPage} from "../pages/project/issues/issues";
 
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
@@ -26,7 +25,6 @@ import {RepoTools} from "../common/tools/repo-tools/repo-tools";
     MyApp,
     HomePage,
     ListPage,
-    IssuesPage,
     SideMenuContentComponent,
   ],
   imports: [
@@ -35,14 +33,13 @@ import {RepoTools} from "../common/tools/repo-tools/repo-tools";
     HttpModule,
     MomentModule,
     IonicStorageModule.forRoot(),
-    ProjectModule,
+    ProjectModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
-    IssuesPage
+    ListPage
   ],
   providers: [
     StatusBar,

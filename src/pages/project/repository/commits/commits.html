@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> {{title?title:'Commits'}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let commit of commits; let i = index" (click)="goToCommit(commit)">
+      <ion-avatar item-start *ngIf="commit.avatar_url">
+        <img src="{{commit.avatar_url}}">
+      </ion-avatar>
+      <ion-avatar item-start *ngIf="!commit.avatar_url"
+                  [attr.data-letters]="commit.author_name.charAt(0).toUpperCase()">
+      </ion-avatar>
+      <h2 text-wrap>{{commit.title}}</h2>
+      <small>{{commit.author_name}} commited about {{commit.created_at |amTimeAgo}}</small>
+    </button>
+  </ion-list>
+  <p class="center" *ngIf="!infiniteScroll.enabled && infiniteScroll.state !='loading' && commits.length > 0">
+    End of results...
+  </p>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

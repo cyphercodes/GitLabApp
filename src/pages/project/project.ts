@@ -1,5 +1,5 @@
-import {Component, ViewChild} from "@angular/core";
-import {IonicPage, Navbar, NavController} from "ionic-angular";
+import {Component} from "@angular/core";
+import {IonicPage} from "ionic-angular";
 import {Project} from "../../common/services/Project";
 import {Api} from "../../common/services/Api";
 import * as mdit from "markdown-it";
@@ -14,8 +14,6 @@ import {RepoTools} from "../../common/tools/repo-tools/repo-tools";
 })
 export class ProjectPage {
 
-  @ViewChild(Navbar) navBar: Navbar;
-
   title: string;
   repoEmpty = false;
   repoTree = [];
@@ -23,16 +21,12 @@ export class ProjectPage {
   rmfile = null;
   proj = null;
 
-  constructor(public navCtrl: NavController, public project: Project, private api: Api, private repoTools: RepoTools) {
+  constructor(public project: Project, private api: Api, private repoTools: RepoTools) {
   }
 
   ionViewDidLoad() {
     console.log(this.project.get());
     this.proj = this.project.get();
-    this.navBar.backButtonClick = ((e: UIEvent) => {
-      this.project.clear();
-      this.navCtrl.pop();
-    });
     let md = new mdit({
       html: true,
       linkify: true,

@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Commit {{commit?commit.short_id:''}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <pre class="center">{{commit?.message}}</pre>
+  <div *ngFor="let outputHtml of outputHtmls" [innerHtml]="outputHtml"></div>
+</ion-content>

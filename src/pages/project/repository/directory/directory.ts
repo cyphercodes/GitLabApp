@@ -1,10 +1,10 @@
 import {Component} from "@angular/core";
 import {NavParams} from "ionic-angular";
-import {Project} from "../../../common/services/Project";
-import {Api} from "../../../common/services/Api";
+import {Project} from "../../../../common/services/Project";
+import {Api} from "../../../../common/services/Api";
 import * as mdit from "markdown-it";
 import * as mditHighlightjs from "markdown-it-highlightjs";
-import {RepoTools} from "../../../common/tools/repo-tools/repo-tools";
+import {RepoTools} from "../../../../common/tools/repo-tools/repo-tools";
 
 @Component({
   selector: 'page-directory',
