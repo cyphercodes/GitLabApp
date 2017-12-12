@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> {{title?title:'Members'}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let model of models; let i = index" (click)="goTo(model)">
+      <ion-avatar item-start *ngIf="model.avatar_url">
+        <img src="{{model.avatar_url}}">
+      </ion-avatar>
+      <ion-avatar item-start *ngIf="!model.avatar_url"
+                  [attr.data-letters]="model.author_name.charAt(0).toUpperCase()">
+      </ion-avatar>
+      <h2 text-wrap>{{model.name}}</h2>
+      <p>@{{model.username}}</p>
+      <ion-note item-end>{{access(model.access_level)}}</ion-note>
+    </button>
+  </ion-list>
+  <p class="center" *ngIf="!infiniteScroll.enabled && infiniteScroll.state !='loading' && models.length > 0">
+    End of results...
+  </p>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

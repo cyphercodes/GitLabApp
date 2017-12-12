@@ -5,6 +5,7 @@ export class Project {
 
   public changed: EventEmitter<any> = new EventEmitter();
   private data = null;
+  canClearProject = true;
 
   constructor() {
   }
@@ -19,7 +20,9 @@ export class Project {
   }
 
   clear() {
-    this.set(null);
+    if (this.canClearProject) {
+      this.set(null);
+    }
   }
 
   has() {

@@ -29,4 +29,12 @@ export class Api {
     return this.http.get(this.url + '/projects/' + id + '/repository/commits/' + sha + '/diff', options);
   }
 
+  getProjectMembers(id, options = {}) {
+    return this.http.get(this.url + '/projects/' + id + '/members', options);
+  }
+
+  getProjectBranches(id, options = {}) {
+    return this.http.get(this.url + '/projects/' + id + '/repository/branches', options);
+  }
+
 }

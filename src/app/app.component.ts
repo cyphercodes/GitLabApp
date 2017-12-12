@@ -17,6 +17,7 @@ import {ProjectPage} from "../pages/project/project";
 import {IssuesPage} from "../pages/project/issues/issues";
 import {DirectoryPage} from "../pages/project/repository/directory/directory";
 import {CommitsPage} from "../pages/project/repository/commits/commits";
+import {MembersPage} from "../pages/project/members/members";
 
 @Component({
   templateUrl: 'app.html'
@@ -122,70 +123,12 @@ export class MyApp {
         component: ProjectPage,
       });
       this.options.push({
-        iconName: 'settings',
-        displayName: 'Settings',
-        component: ProjectPage,
+        iconName: 'people',
+        displayName: 'Members',
+        component: MembersPage,
       });
     }
 
-    // Load options with nested items (with icons)
-    // -----------------------------------------------
-    // this.options.push({
-    //   displayName: 'Sub options with icons',
-    //   subItems: [
-    //     {
-    //       iconName: 'basket',
-    //       displayName: 'Sub Option 1',
-    //       component: ListPage
-    //     },
-    //   ]
-    // });
-
-    // Load options with nested items (without icons)
-    // -----------------------------------------------
-    // this.options.push({
-    //   displayName: 'Sub options without icons',
-    //   subItems: [
-    //     {
-    //       displayName: 'Sub Option 4',
-    //       component: ListPage
-    //     },
-    //     {
-    //       displayName: 'Sub Option 5',
-    //       component: ListPage
-    //     },
-    //   ]
-    // });
-
-    // Load special options
-    // -----------------------------------------------
-    // this.options.push({
-    //   displayName: 'Special options',
-    //   subItems: [
-    //     {
-    //       iconName: 'log-in',
-    //       displayName: 'Login',
-    //       custom: {
-    //         isLogin: true
-    //       }
-    //     },
-    //     {
-    //       iconName: 'log-out',
-    //       displayName: 'Logout',
-    //       custom: {
-    //         isLogout: true
-    //       }
-    //     },
-    //     {
-    //       iconName: 'globe',
-    //       displayName: 'Open Google',
-    //       custom: {
-    //         isExternalLink: true,
-    //         externalUrl: 'http://www.google.com'
-    //       }
-    //     }
-    //   ]
-    // });
     if (!this.project.has()) {
       this.options.push({
         iconName: 'unlock',
@@ -202,7 +145,10 @@ export class MyApp {
       if (option.custom && option.custom.isLogout) {
         this.auth.logout();
       } else {
-        this.nav.popToRoot({animate: false});
+        this.project.canClearProject = false;
+        this.nav.popToRoot({animate: false}).then(() => {
+          this.project.canClearProject = true;
+        });
         this.nav.push(option.component || HomePage, {'title': option.displayName}, {animate: false});
         // this.nav.setRoot(option.component || HomePage, { 'title': option.displayName });
       }

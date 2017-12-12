@@ -8,6 +8,7 @@ import {IssuesPage} from "./issues/issues";
 import {CommitsPage} from "./repository/commits/commits";
 import {MomentModule} from "angular2-moment";
 import {CommitPage} from "./repository/commits/commit/commit";
+import {MembersPage} from "./members/members";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {CommitPage} from "./repository/commits/commit/commit";
     FilePage,
     IssuesPage,
     CommitsPage,
-    CommitPage
+    CommitPage,
+    MembersPage
   ],
   imports: [
     MomentModule,
@@ -26,7 +28,8 @@ import {CommitPage} from "./repository/commits/commit/commit";
     IonicPageModule.forChild(FilePage),
     IonicPageModule.forChild(IssuesPage),
     IonicPageModule.forChild(CommitsPage),
-    IonicPageModule.forChild(CommitPage)
+    IonicPageModule.forChild(CommitPage),
+    IonicPageModule.forChild(MembersPage)
   ],
 })
 export class ProjectModule {

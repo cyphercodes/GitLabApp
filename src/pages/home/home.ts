@@ -23,8 +23,8 @@ export class HomePage {
   constructor(public navCtrl: NavController, public api: Api, public auth: Auth, public project: Project) {
   }
 
-  ionViewWillEnter() {
-    // this.project.clear();
+  ionViewDidEnter() {
+    this.project.clear();
   }
 
   ionViewDidLoad() {
