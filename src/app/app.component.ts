@@ -3,7 +3,6 @@ import {MenuController, Nav, Platform} from "ionic-angular";
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
 
-import {HomePage} from "../pages/home/home";
 import {
   MenuOptionModel,
   SideMenuContentComponent,
@@ -13,11 +12,6 @@ import {Auth} from "../common/services/Auth";
 import {Storage} from "@ionic/storage";
 import swal from "sweetalert2";
 import {Project} from "../common/services/Project";
-import {ProjectPage} from "../pages/project/project";
-import {IssuesPage} from "../pages/project/issues/issues";
-import {DirectoryPage} from "../pages/project/repository/directory/directory";
-import {CommitsPage} from "../pages/project/repository/commits/commits";
-import {MembersPage} from "../pages/project/members/members";
 
 @Component({
   templateUrl: 'app.html'
@@ -27,7 +21,7 @@ export class MyApp {
 
   @ViewChild(SideMenuContentComponent) sideMenu: SideMenuContentComponent;
 
-  public rootPage: any = HomePage;
+  public rootPage: any = 'HomePage';
 
   public options: Array<MenuOptionModel> = [];
 
@@ -58,7 +52,7 @@ export class MyApp {
         this.options = [];
       }
       firstTime = false;
-      this.nav.setRoot(HomePage);
+      this.nav.setRoot('HomePage');
     });
     this.storage.get('token').then((token) => {
       if (token && token != '') {
@@ -69,7 +63,7 @@ export class MyApp {
     });
     this.project.changed.subscribe((data) => {
       if (this.project.has()) {
-        this.nav.push(ProjectPage);
+        this.nav.push('ProjectPage');
       } else {
         // this.nav.setRoot(HomePage);
       }
@@ -89,13 +83,13 @@ export class MyApp {
       this.options.push({
         iconName: 'home',
         displayName: 'Home',
-        component: HomePage,
+        component: 'HomePage',
       });
     } else {
       this.options.push({
         iconName: 'home',
         displayName: 'Overview',
-        component: ProjectPage,
+        component: 'ProjectPage',
       });
       this.options.push({
         // iconName: 'copy',
@@ -104,29 +98,29 @@ export class MyApp {
           {
             displayName: 'Files',
             iconName: 'copy',
-            component: DirectoryPage
+            component: 'DirectoryPage'
           },
           {
             displayName: 'Commits',
             iconName: 'git-commit',
-            component: CommitsPage
+            component: 'CommitsPage'
           },
         ]
       });
       this.options.push({
         iconName: 'paper',
         displayName: 'Issues',
-        component: IssuesPage,
+        component: 'IssuesPage',
       });
       this.options.push({
         iconName: 'git-pull-request',
         displayName: 'Merge Requests',
-        component: ProjectPage,
+        component: 'ProjectPage',
       });
       this.options.push({
         iconName: 'people',
         displayName: 'Members',
-        component: MembersPage,
+        component: 'MembersPage',
       });
     }
 
@@ -162,10 +156,10 @@ export class MyApp {
         this.nav.popToRoot({animate: false}).then(() => {
           this.project.canClearProject = true;
         });
-        if (option.component === HomePage) {
-          this.nav.setRoot(option.component || HomePage, {'title': option.displayName});
+        if (option.component === 'HomePage') {
+          this.nav.setRoot(option.component || 'HomePage', {'title': option.displayName});
         } else {
-          this.nav.push(option.component || HomePage, {'title': option.displayName}, {animate: false});
+          this.nav.push(option.component || 'HomePage', {'title': option.displayName}, {animate: false});
         }
       }
     });

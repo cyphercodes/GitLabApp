@@ -30,12 +30,13 @@ import {HomeModule} from "../pages/home/home.module";
     HttpModule,
     MomentModule,
     IonicStorageModule.forRoot(),
+    HomeModule,
     ProjectModule,
-    HomeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    SideMenuContentComponent,
   ],
   providers: [
     StatusBar,
@@ -46,7 +47,7 @@ import {HomeModule} from "../pages/home/home.module";
     Auth,
     InAppBrowser,
     Project,
-    RepoTools,
+    RepoTools
   ]
 })
 export class AppModule {

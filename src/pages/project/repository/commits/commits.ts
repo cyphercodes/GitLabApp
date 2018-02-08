@@ -1,9 +1,9 @@
 import {Component, ViewChild} from "@angular/core";
 import {Api} from "../../../../common/services/Api";
 import {Project} from "../../../../common/services/Project";
-import {InfiniteScroll, NavController} from "ionic-angular";
-import {CommitPage} from "./commit/commit";
+import {InfiniteScroll, IonicPage, NavController} from "ionic-angular";
 
+@IonicPage()
 @Component({
   selector: 'page-commits',
   templateUrl: 'commits.html',
@@ -63,6 +63,6 @@ export class CommitsPage {
   }
 
   goToCommit(commit) {
-    this.nav.push(CommitPage, {commit: commit});
+    this.nav.push('CommitPage', {commit: commit});
   }
 }

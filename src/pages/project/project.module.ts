@@ -1,35 +1,27 @@
 import {NgModule} from "@angular/core";
 import {IonicPageModule} from "ionic-angular";
 import {ProjectPage} from "./project";
-import {DirectoryContentComponent} from "../../common/tools/directory-content/directory-content.component";
-import {DirectoryPage} from "./repository/directory/directory";
-import {FilePage} from "./repository/file/file";
-import {IssuesPage} from "./issues/issues";
-import {CommitsPage} from "./repository/commits/commits";
 import {MomentModule} from "angular2-moment";
-import {CommitPage} from "./repository/commits/commit/commit";
-import {MembersPage} from "./members/members";
+import {MembersModule} from "./members/members.module";
+import {CommitModule} from "./repository/commits/commit/commit.module";
+import {IssuesModule} from "./issues/issues.module";
+import {FileModule} from "./repository/file/file.module";
+import {DirectoryModule} from "./repository/directory/directory.module";
+import {DirectoryContentModule} from "../../common/tools/directory-content/directory-content.module";
 
 @NgModule({
   declarations: [
     ProjectPage,
-    DirectoryPage,
-    DirectoryContentComponent,
-    FilePage,
-    IssuesPage,
-    CommitsPage,
-    CommitPage,
-    MembersPage
   ],
   imports: [
     MomentModule,
     IonicPageModule.forChild(ProjectPage),
-    IonicPageModule.forChild(DirectoryPage),
-    IonicPageModule.forChild(FilePage),
-    IonicPageModule.forChild(IssuesPage),
-    IonicPageModule.forChild(CommitsPage),
-    IonicPageModule.forChild(CommitPage),
-    IonicPageModule.forChild(MembersPage)
+    FileModule,
+    IssuesModule,
+    CommitModule,
+    MembersModule,
+    DirectoryModule,
+    DirectoryContentModule
   ],
 })
 export class ProjectModule {

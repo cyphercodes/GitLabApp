@@ -1,8 +1,9 @@
 import {Component, ViewChild} from "@angular/core";
 import {Api} from "../../../common/services/Api";
 import {Project} from "../../../common/services/Project";
-import {InfiniteScroll, NavController} from "ionic-angular";
+import {InfiniteScroll, IonicPage, NavController} from "ionic-angular";
 
+@IonicPage()
 @Component({
   selector: 'page-members',
   templateUrl: 'members.html',

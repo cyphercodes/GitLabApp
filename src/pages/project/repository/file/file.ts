@@ -1,9 +1,10 @@
 import {Component} from "@angular/core";
-import {NavParams} from "ionic-angular";
+import {IonicPage, NavParams} from "ionic-angular";
 import {Project} from "../../../../common/services/Project";
 import {Api} from "../../../../common/services/Api";
 import {RepoTools} from "../../../../common/tools/repo-tools/repo-tools";
 
+@IonicPage()
 @Component({
   selector: 'page-file',
   templateUrl: 'file.html',

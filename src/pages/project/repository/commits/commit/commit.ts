@@ -1,10 +1,11 @@
 import {Component} from "@angular/core";
-import {NavParams} from "ionic-angular";
+import {IonicPage, NavParams} from "ionic-angular";
 import {Project} from "../../../../../common/services/Project";
 import {Api} from "../../../../../common/services/Api";
 import {Diff2Html} from 'diff2html';
 import * as hljs from "highlight.js";
 
+@IonicPage()
 @Component({
   selector: 'page-commit',
   templateUrl: 'commit.html',
