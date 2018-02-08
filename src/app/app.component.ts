@@ -131,7 +131,7 @@ export class MyApp {
       });
     }
 
-    if (!this.project.has()) {
+    if (this.auth.isLoggedIn) {
       this.options.push({
         iconName: 'unlock',
         displayName: 'Logout',
@@ -139,20 +139,35 @@ export class MyApp {
           isLogout: true
         }
       });
+    } else {
+      this.options.push({
+        iconName: 'lock',
+        displayName: 'Login',
+        custom: {
+          isLogin: true
+        }
+      });
     }
   }
 
   public selectOption(option: MenuOptionModel): void {
     this.menuCtrl.close().then(() => {
-      if (option.custom && option.custom.isLogout) {
-        this.auth.logout();
+      if (option.custom) {
+        if (option.custom.isLogout) {
+          this.auth.logout();
+        } else if (option.custom.isLogin) {
+          this.auth.goLogin();
+        }
       } else {
         this.project.canClearProject = false;
         this.nav.popToRoot({animate: false}).then(() => {
           this.project.canClearProject = true;
         });
-        this.nav.push(option.component || HomePage, {'title': option.displayName}, {animate: false});
-        // this.nav.setRoot(option.component || HomePage, { 'title': option.displayName });
+        if (option.component === HomePage) {
+          this.nav.setRoot(option.component || HomePage, {'title': option.displayName});
+        } else {
+          this.nav.push(option.component || HomePage, {'title': option.displayName}, {animate: false});
+        }
       }
     });
   }
