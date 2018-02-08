@@ -2,7 +2,11 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 # GitlabApp 
-An open source Gitlab client app for IOS and Android built with Ionic Framework.
+An open source Gitlab client PWA and hybrid app for IOS and Android built with Ionic Framework.
+
+LIVE:
+
+https://cyphercodes.gitlab.io/GitlabApp/
 
 ## How to clone and initialize this project
 
