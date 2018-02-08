@@ -8,6 +8,7 @@ pages:
     paths:
     - public
   cache:
+    untracked: true
     paths:
       - node_modules
   only:
