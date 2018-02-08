@@ -30,19 +30,17 @@ export class Auth {
 
   goLogin() {
     const state = Math.random().toString(36).substr(2, 8);
+    const base_url = window.location.protocol + '//' + window.location.hostname;
     const client_id = '46b1ed0c950b9445ece44639c2295c199675cfbc0fac3c355e3bd1ce8eca1e79';
-    const redirect_uri = encodeURIComponent("http://localhost/auth");
-    const ref = this.iab.create('https://gitlab.com/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=token&state=' + state, "_blank", {
-      zoom: 'no',
-      location: 'no',
-      clearcache: 'yes',
-      clearsessioncache: 'yes',
-    });
+    const redirect_uri = encodeURIComponent(base_url + "/auth");
+    console.log(redirect_uri);
+    const ref = window.open('https://gitlab.com/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=token&state=' + state, "_blank");
 
-    ref.on('loadstart').subscribe((res) => {
-      if ((res.url).indexOf("http://localhost/auth") === 0) {
+    ref.addEventListener('load', () => {
+      const url = ref.location.href;
+      if ((url).indexOf(base_url + "/auth") === 0) {
         ref.close();
-        let responseParameters = ((res.url).split("#")[1]).split("&");
+        let responseParameters = ((url).split("#")[1]).split("&");
         let parsedResponse = {};
         for (let i = 0; i < responseParameters.length; i++) {
           parsedResponse[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
@@ -53,7 +51,29 @@ export class Auth {
           this.login(token);
         }
       }
-    });
+    })
+    // const ref = this.iab.create('https://gitlab.com/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=token&state=' + state, "_blank", {
+    //   zoom: 'no',
+    //   location: 'no',
+    //   clearcache: 'yes',
+    //   clearsessioncache: 'yes',
+    // });
+    //
+    // ref.on('loadstart').subscribe((res) => {
+    //   if ((res.url).indexOf(base_url + "/auth") === 0) {
+    //     ref.close();
+    //     let responseParameters = ((res.url).split("#")[1]).split("&");
+    //     let parsedResponse = {};
+    //     for (let i = 0; i < responseParameters.length; i++) {
+    //       parsedResponse[responseParameters[i].split("=")[0]] = responseParameters[i].split("=")[1];
+    //     }
+    //     let token = parsedResponse['access_token'];
+    //     let backstate = parsedResponse['state'];
+    //     if (token !== undefined && token !== null && backstate === state) {
+    //       this.login(token);
+    //     }
+    //   }
+    // });
 
   }
 
