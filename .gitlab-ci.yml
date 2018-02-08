@@ -3,10 +3,10 @@ image: node:6.10.0
 pages:
   script:
   - npm install
-  - npm run build --prod
+  - npm run build --wwwDir "public" --prod
   artifacts:
     paths:
-    - www
+    - public
   cache:
     paths:
       - node_modules
