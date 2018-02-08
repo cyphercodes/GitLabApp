@@ -3,7 +3,6 @@ import {ErrorHandler, NgModule} from "@angular/core";
 import {IonicApp, IonicErrorHandler, IonicModule} from "ionic-angular";
 
 import {MyApp} from "./app.component";
-import {HomePage} from "../pages/home/home";
 
 import {StatusBar} from "@ionic-native/status-bar";
 import {SplashScreen} from "@ionic-native/splash-screen";
@@ -18,11 +17,11 @@ import {IonicStorageModule} from "@ionic/storage";
 import {ProjectModule} from "../pages/project/project.module";
 import {Project} from "../common/services/Project";
 import {RepoTools} from "../common/tools/repo-tools/repo-tools";
+import {HomeModule} from "../pages/home/home.module";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     SideMenuContentComponent,
   ],
   imports: [
@@ -31,12 +30,12 @@ import {RepoTools} from "../common/tools/repo-tools/repo-tools";
     HttpModule,
     MomentModule,
     IonicStorageModule.forRoot(),
-    ProjectModule
+    ProjectModule,
+    HomeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
   ],
   providers: [
     StatusBar,
@@ -47,7 +46,7 @@ import {RepoTools} from "../common/tools/repo-tools/repo-tools";
     Auth,
     InAppBrowser,
     Project,
-    RepoTools
+    RepoTools,
   ]
 })
 export class AppModule {

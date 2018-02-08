@@ -1,9 +1,10 @@
 import {Component, ViewChild} from "@angular/core";
-import {InfiniteScroll, NavController, Searchbar} from "ionic-angular";
+import {InfiniteScroll, IonicPage, NavController, Searchbar} from "ionic-angular";
 import {Api} from "../../common/services/Api";
 import {Auth} from "../../common/services/Auth";
 import {Project} from "../../common/services/Project";
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
