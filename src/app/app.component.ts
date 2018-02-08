@@ -48,7 +48,6 @@ export class MyApp {
   initializeApp() {
     let firstTime = true;
     this.auth.authChanged.subscribe((data) => {
-      console.log("auth has changed!");
       if (data.isLoggedIn) {
         this.initializeOptions();
         if (!firstTime) {
