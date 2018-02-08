@@ -1,0 +1,14 @@
+image: node:6.10.0
+
+pages:
+  script:
+  - npm install
+  - npm run build --prod
+  artifacts:
+    paths:
+    - www
+  cache:
+    paths:
+      - node_modules
+  only:
+  - master
