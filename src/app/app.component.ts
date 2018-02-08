@@ -46,15 +46,9 @@ export class MyApp {
   }
 
   initializeApp() {
-    this.storage.get('token').then((token) => {
-      if (token && token != '') {
-        this.auth.login(token);
-      } else {
-        this.auth.logout();
-      }
-    });
     let firstTime = true;
     this.auth.authChanged.subscribe((data) => {
+      console.log("auth has changed!");
       if (data.isLoggedIn) {
         this.initializeOptions();
         if (!firstTime) {
@@ -64,7 +58,15 @@ export class MyApp {
       } else {
         this.options = [];
       }
+      firstTime = false;
       this.nav.setRoot(HomePage);
+    });
+    this.storage.get('token').then((token) => {
+      if (token && token != '') {
+        this.auth.login(token);
+      } else {
+        this.auth.logout();
+      }
     });
     this.project.changed.subscribe((data) => {
       if (this.project.has()) {
