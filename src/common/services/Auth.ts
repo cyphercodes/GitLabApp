@@ -59,7 +59,7 @@ export class Auth {
         }
       });
     } else {
-      const ref = window.open('https://gitlab.com/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=token&state=' + state, "_blank");
+      const ref = window.open('https://gitlab.com/oauth/authorize?client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&response_type=token&state=' + state, "_blank", "location=no,menubar=no");
       ref.addEventListener('load', () => {
         const url = ref.location.href;
         if ((url).indexOf(base_url + "/auth") === 0) {

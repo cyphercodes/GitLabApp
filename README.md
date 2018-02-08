@@ -47,4 +47,4 @@ For this application, Gitlab OAuth will only work if it is running on one of the
 
 * A device with cordova (installed app on Android or IOS)
 * Local server running on `localhost` or on `localhost:8100`
-* On the main GitLab page for the project: https://cyphercodes.gitlab.io
+* On the main GitLab page for the project: https://cyphercodes.gitlab.io/GitlabApp
