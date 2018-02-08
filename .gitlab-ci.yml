@@ -1,6 +1,7 @@
 image: node:6.10.0
 
 pages:
+  stage: deploy
   script:
   - npm install
   - npm run build --wwwDir "public" --prod
